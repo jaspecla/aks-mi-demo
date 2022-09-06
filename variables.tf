@@ -46,8 +46,13 @@ variable "resource_group_location" {
 
 variable "resource_group_name" {
   default     = "AKS_MI_Demo"
-  description = "The name of the Resource Group to create."
+  description = "The name of the Resource Group to contain the cluster."
   
+}
+
+variable "pv_resource_group_name" {
+  default = "AKS_MI_Demo_PVs"
+  description = "The name of the Resource Group to contain the Persistent Volumes"
 }
 
 variable "ssh_public_key" {

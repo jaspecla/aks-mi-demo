@@ -8,6 +8,11 @@ resource "azurerm_resource_group" "rg" {
   name     = var.resource_group_name
 }
 
+resource "azurerm_resource_group" "rg-pv" {
+  location = var.resource_group_location
+  name     = var.pv_resource_group_name
+}
+
 resource "random_id" "log_analytics_workspace_name_suffix" {
   byte_length = 8
 }
@@ -68,3 +73,10 @@ resource "azurerm_kubernetes_cluster" "k8s" {
   #   client_secret = var.aks_service_principal_client_secret
   # }
 }
+
+resource "azurerm_role_assignment" "k8s_contribute_pvrg" {
+  scope = azurerm_resource_group.rg-pv.id
+  role_definition_name = "Contributor"
+  principal_id = azurerm_kubernetes_cluster.k8s.identity[0].principal_id
+}
+

@@ -1,0 +1,11 @@
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: azuredisk-csi-customrg
+provisioner: disk.csi.azure.com
+parameters:
+  skuname: StandardSSD_LRS
+  resourceGroup: "AKS_MI_Demo_PVs"
+allowVolumeExpansion: true
+reclaimPolicy: Delete
+volumeBindingMode: WaitForFirstConsumer

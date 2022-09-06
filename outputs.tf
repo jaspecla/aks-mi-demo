@@ -33,6 +33,14 @@ output "kube_config" {
   sensitive = true
 }
 
+output "cluster_managed_identity" {
+  value = azurerm_kubernetes_cluster.k8s.identity[0].principal_id
+}
+
 output "resource_group_name" {
   value = azurerm_resource_group.rg.name
+}
+
+output "pv_resource_group_name" {
+  value = azurerm_resource_group.rg-pv.name
 }
